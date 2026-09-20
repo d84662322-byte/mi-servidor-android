@@ -14,26 +14,25 @@ app.get('/', (req, res) => {
 
 app.post('/api/usuario', (req, res) => {
   try {
-    const { nombre, edad, email, token } = req.body;
+    const { key, value, id } = req.body;
 
-    if (!nombre || !email) {
+    if (!key || !value) {
       return res.status(400).json({ 
-        error: 'Faltan datos obligatorios (nombre o email)' 
+        error: 'Faltan datos obligatorios (key o value)' 
       });
     }
 
-    console.log('Datos recibidos:');
-    console.log('Nombre:', nombre);
-    console.log('Edad:', edad);
-    console.log('Email:', email);
-    console.log('Token:', token || 'No se envió token');
+    console.log('Datos recibidos ✅✅✅');
+    console.log('key:', key);
+    console.log('value:', value);
+    console.log('id:', id);
 
     res.status(200).json({
       mensaje: 'Datos recibidos correctamente',
       datos: {
-        nombre,
-        edad,
-        email
+        key,
+        value,
+        id
       }
     });
 
