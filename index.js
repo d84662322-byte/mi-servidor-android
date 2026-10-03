@@ -22,35 +22,31 @@ app.get('/', (req, res) => {
 
 app.post('/api/usuario', (req, res) => {
   try {
-    const { key, value, id } = req.body;
+    const { token } = req.body;
 
-    if (!key || !value) {
+    if (!token) {
       return res.status(400).json({ 
-        error: 'Faltan datos obligatorios (key o value)' 
+        error: 'Faltan datos obligatorios (token)' 
       });
     }
     
-    if (existe.has(key)) {
-      console.log(`La key ${key} ya fue registrada anteriormente`);
+    if (existe.has(token)) {
+      console.log(`El token ${token} ya fue registrado anteriormente`);
       return res.status(409).json({
-        error: 'Key ya registrada',
-        mensaje: 'Esta Key ya fue enviada antes'
+        error: 'Token ya registrado',
+        mensaje: 'Este Token ya fue enviado antes'
       });
     }
     
-    existe.add(key);
+    existe.add(token);
 
     console.log('Datos recibidos ✅✅✅');
-    console.log('key:', key);
-    console.log('value:', value);
-    console.log('id:', id);
+    console.log('token:', token);
 
     res.status(200).json({
       mensaje: 'Datos recibidos correctamente',
       datos: {
-        key,
-        value,
-        id
+        token
       }
     });
 
